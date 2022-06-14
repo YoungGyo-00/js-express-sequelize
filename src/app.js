@@ -1,4 +1,3 @@
-// 서버 동작 규정 코드
 const express = require('express'); // http 모듈 + 많은 기능 포함
 const morgan = require('morgan'); // request 에 대한 추가 로그를 콘솔에 기록
 const cookieParser = require('cookie-parser'); // 요청된 쿠키를 쉽게 추출하는 미들웨어
@@ -6,10 +5,10 @@ const path = require('path'); // 파일 경로 찾을 때 사용하는 모듈
 const passport = require('passport'); // 로그인(local, kakao ...)에 따른 요청 인증 모듈
 const session = require('express-session'); // passport 모듈로 로그인 후 유저 정보를 세션에 저장
 const dotenv = require('dotenv'); // 환경변수 파일 읽기
-const { UUID } = require('sequelize');
+const { UUID } = require('sequelize'); // 세션 ID 를 랜덤하고 중복되지 않게 만들기 위한 모듈
 const FileStore = require('session-file-store')(session); // 세션 객체 저장 모듈
 
-// 서버 생성
+// 서버 생성 => 클래스 선언문으로 정리
 class App {
     constructor() {
         this.app = express(); // express() => 애플리케이션 객체 생성
@@ -38,7 +37,10 @@ class App {
                 secure: false, // http 환경에서만 사용(개발 단계) 
                 maxAge: 1*60*60*1000 // 1시간 설정
             },
-            rolling: true // expiration reset
+            rolling: true, // expiration reset
+            genid: () => { // 세션 ID 만들기, req 첨부된 일부 값을 사용하려면 첫 번째 인수로 req 제공
+                return "testCookie";
+            } 
         }));
         this.app.use(passport.initialize()); // passport 구성을 위한 미들웨어
         this.app.use(passport.session());
@@ -68,7 +70,7 @@ class App {
             res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
             res.status(err.status || 500);
             
-            console.log();
+            console.error(err.message);
             res.status(500).json({ message : error.message });
         });
     }
