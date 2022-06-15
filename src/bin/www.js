@@ -2,7 +2,6 @@
 const app = require('../app.js');
 const { sequelize } = require('../models');
 
-console.log(sequelize);
 // MySQL 연결
 sequelize.sync({ force: false }) // 모델에서 정의한 테이블이 존재하지 않을 경우 동작, force : 강제 업데이트
     .then(() => {

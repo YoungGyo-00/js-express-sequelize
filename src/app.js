@@ -23,7 +23,7 @@ class App {
     setMiddleWare() {
         dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
         this.app.set('port', process.env.PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
-        // passportConfig(passport); // passport 미들웨어는 passport 폴더에서 실행
+        passportConfig(passport); // passport 미들웨어는 passport 폴더에서 실행
 
         this.app.use(morgan('dev')); // 추가적인 로그 생성
         this.app.use(express.json()); // json Request Body 파싱
