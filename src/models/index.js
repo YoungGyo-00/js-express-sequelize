@@ -8,7 +8,7 @@ const basename = path.basename(__filename); // index.js
 
 class Database {
   constructor() {
-    const db = {};
+    this.db = {}; // 자기 차조 변수 => 생성할 인스턴스 가리킴
     const sequelize = new Sequelize(
       config.database, config.username, config.password, config
     );
@@ -19,22 +19,21 @@ class Database {
       })
       .forEach(file => {
         const model = require(path.join(__dirname, file)); // 파일에 저장되어 있는 모델 정의와 동일한 객체 저장
-        db[model.name] = model; // 객체 추가
+        this.db[model.name] = model; // 객체 추가
       });
 
-    Object.keys(db).forEach(modelName => {
-      db[modelName].init(sequelize); // 객체의 init() 함수 실행
+    Object.keys(this.db).forEach(modelName => {
+      this.db[modelName].init(sequelize); // 객체의 init() 함수 실행
     });
 
-    Object.keys(db).forEach(modelName => {
-      if (db[modelName].associate) {
-        db[modelName].associate(db); // 모델 객체의 associate() 함수 실행
+    Object.keys(this.db).forEach(modelName => {
+      if (this.db[modelName].associate) {
+        this.db[modelName].associate(this.db); // 모델 객체의 associate() 함수 실행
       }
     });
 
-    db.sequelize = sequelize;
+    this.db.sequelize = sequelize;
   }
 }
-
 
 module.exports = new Database().db;

@@ -3,6 +3,7 @@ const morgan = require('morgan'); // request 에 대한 추가 로그를 콘솔�
 const cookieParser = require('cookie-parser'); // 요청된 쿠키를 쉽게 추출하는 미들웨어
 const path = require('path'); // 파일 경로 찾을 때 사용하는 모듈
 const passport = require('passport'); // 로그인(local, kakao ...)에 따른 요청 인증 모듈
+const passportConfig = require('./passport');
 const session = require('express-session'); // passport 모듈로 로그인 후 유저 정보를 세션에 저장
 const dotenv = require('dotenv'); // 환경변수 파일 읽기
 const { UUID } = require('sequelize'); // 세션 ID 를 랜덤하고 중복되지 않게 만들기 위한 모듈
@@ -22,6 +23,7 @@ class App {
     setMiddleWare() {
         dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
         this.app.set('port', process.env.PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
+        // passportConfig(passport); // passport 미들웨어는 passport 폴더에서 실행
 
         this.app.use(morgan('dev')); // 추가적인 로그 생성
         this.app.use(express.json()); // json Request Body 파싱
