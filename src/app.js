@@ -17,7 +17,7 @@ class App {
         this.getRouting();
         this.errorHandler();
     }
-
+    
     // 미들웨어 설정
     setMiddleWare() {
         dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
