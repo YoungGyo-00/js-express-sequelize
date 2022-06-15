@@ -1,5 +1,5 @@
 const local = require('./localStrategy');
-const dotenv = require('dotenv'); // 환경변수 파일 읽기
+const dotenv = require('dotenv');
 dotenv.config();
 
 const { USERNAMEFIELD, PASSWORDFIELD } = process.env;

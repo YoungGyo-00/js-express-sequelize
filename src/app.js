@@ -9,6 +9,8 @@ const dotenv = require('dotenv'); // 환경변수 파일 읽기
 const { UUID } = require('sequelize'); // 세션 ID 를 랜덤하고 중복되지 않게 만들기 위한 모듈
 const FileStore = require('session-file-store')(session); // 세션 객체 저장 모듈
 
+const testRoucter = require('./routes/test');
+
 // 서버 생성 => 클래스 선언문으로 정리
 class App {
     constructor() {
@@ -55,7 +57,7 @@ class App {
 
     // 라우터 설정
     getRouting() {
-
+        this.app.use('/', testRoucter);
     }
 
     // 에러 처리 미들웨어 => 비동기 에러 처리 문제 해결 방법 찾아야 함
