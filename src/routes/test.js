@@ -5,11 +5,12 @@ const { User } = require('../models');
 class Test {
     constructor () {
         this.router = router;
-        this.initRouters();
+        this.getController();
     }
 
-    initRouters() {
+    getController() {
         this.router.get('/', Controller.test);
+        
     }
 }
 

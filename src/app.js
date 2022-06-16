@@ -11,13 +11,13 @@ const FileStore = require('session-file-store')(session); // 세션 객체 저�
 
 const testRoucter = require('./routes/test');
 
-// 서버 생성 => 클래스 선언문으로 정리
+// 서버 생성
 class App {
     constructor() {
         this.app = express(); // express() => 애플리케이션 객체 생성
         this.setMiddleWare();
         this.setStatic();
-        this.getRouting();
+        this.getRouter();
         this.errorHandler();
     }
     
@@ -56,7 +56,7 @@ class App {
     }
 
     // 라우터 설정
-    getRouting() {
+    getRouter() {
         this.app.use('/', testRoucter);
     }
 
