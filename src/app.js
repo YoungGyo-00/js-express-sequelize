@@ -8,8 +8,10 @@ const session = require('express-session'); // passport 모듈로 로그인 후 
 const dotenv = require('dotenv'); // 환경변수 파일 읽기
 const { UUID } = require('sequelize'); // 세션 ID 를 랜덤하고 중복되지 않게 만들기 위한 모듈
 const FileStore = require('session-file-store')(session); // 세션 객체 저장 모듈
+dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
 
 const testRoucter = require('./routes/test');
+const { PORT, COOKIE_SECRET } = process.env;
 
 // 서버 생성
 class App {
@@ -23,17 +25,16 @@ class App {
     
     // 미들웨어 설정
     setMiddleWare() {
-        dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
-        this.app.set('port', process.env.PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
+        this.app.set('port', PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
         passportConfig(passport); // passport 미들웨어는 passport 폴더에서 실행
 
         this.app.use(morgan('dev')); // 추가적인 로그 생성
         this.app.use(express.json()); // json Request Body 파싱
         this.app.use(express.urlencoded({ extended: false })); // x-www-form-urlencoded 형태 데이터 파싱, querystring(false), qs(true)
-        this.app.use(cookieParser(process.env.COOKIE_SECRET)); // 암호화(서명)된 쿠키 발급
+        this.app.use(cookieParser(COOKIE_SECRET)); // 암호화(서명)된 쿠키 발급
         this.app.use(session({
             resave: false, // 세션 데이터가 바뀌기 전까지 세션저장소의 값을 저장할지 여부
-            secret: process.env.COOKIE_SECRET, // cookieParser와 같은 signed(서명) 사용
+            secret: COOKIE_SECRET, // cookieParser와 같은 signed(서명) 사용
             store: new FileStore(), // mysql(실제 배포 시) 에 세션을 저장할 수도 있음
             saveUninitialized: false, // 세션이 필요하기 전에 세션 구동할지 여부
             cookie: { // 세션 쿠키 설정

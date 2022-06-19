@@ -2,8 +2,8 @@ const local = require('./localStrategy');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const { USERNAMEFIELD, PASSWORDFIELD } = process.env;
 const { User } = require('../models');
+const { USERNAMEFIELD, PASSWORDFIELD } = process.env;
 
 module.exports = (passport) => {
     passport.serializeUser((user, done) => {
