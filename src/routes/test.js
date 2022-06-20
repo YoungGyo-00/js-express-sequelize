@@ -1,3 +1,4 @@
+// Express API 구조 정의
 const router = require('express').Router();
 const Controller = require('../controllers/test');
 const { User } = require('../models');

@@ -48,7 +48,7 @@ class App {
             } 
         }));
         this.app.use(passport.initialize()); // passport 구성을 위한 미들웨어
-        this.app.use(passport.session());
+        this.app.use(passport.session()); // passport.deserializeUser() Method 실행
     }
 
     // 사진 등의 정적 파일 경로 설정
