@@ -2,19 +2,12 @@
 const User = require("../models/user");
 
 class TestService {
-    // 인스턴스 만드는 공간
-
-    constructor() {
-        // Data Access layer 인스턴스 만드는 공간
-        
-    }
-
-    test = async (dto) => {
+    static test = async (dto) => {
         try {
             console.log(dto);
             const result = await User.create({
-                email: "test",
-                password: "test"
+                email: "test1",
+                password: "test1"
             });
             return {"message" : "Answer: Good"};
         } catch (err) {
@@ -24,4 +17,4 @@ class TestService {
     }
 }
 
-module.exports = new TestService();
+module.exports = TestService;
