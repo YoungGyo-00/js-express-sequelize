@@ -8,6 +8,7 @@ const session = require('express-session'); // passport 모듈로 로그인 후 
 const dotenv = require('dotenv'); // 환경변수 파일 읽기
 const { UUID } = require('sequelize'); // 세션 ID 를 랜덤하고 중복되지 않게 만들기 위한 모듈
 const FileStore = require('session-file-store')(session); // 세션 객체 저장 모듈
+const cors = require('cors') // 외부 도메인, 프로토콜, 포트에 있는 리소스를 요청하는 cross-orgin HTTP 요청 처리
 dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
 
 const { MainRouter } = require('./routes');
@@ -28,6 +29,7 @@ class App {
         this.app.set('port', PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
         passportConfig(passport); // passport 미들웨어는 passport 폴더에서 실행
 
+        this.app.use(cors()); // 모든 도메인에 대해 허용
         this.app.use(morgan('dev')); // 추가적인 로그 생성
         this.app.use(express.json()); // json Request Body 파싱
         this.app.use(express.urlencoded({ extended: false })); // x-www-form-urlencoded 형태 데이터 파싱, querystring(false), qs(true)
