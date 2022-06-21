@@ -3,16 +3,14 @@ const { User } = require("../models");
 
 class TestService {
     static test = async (dto) => {
-        try {
-            console.log(dto);
+        try { 
             const result = await User.create({
-                email: "test3",
-                password: "test3"
+                email: "test4",
+                password: "test4"
             });
             return {"message" : "Answer: Good"};
         } catch (err) {
-            console.error(err);
-            return next(err);
+            throw new Error(err);
         }
     }
 }

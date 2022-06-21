@@ -58,7 +58,7 @@ class App {
 
     // 라우터 설정
     getRouter() {
-        this.app.use('/', MainRouter);
+        this.app.use(MainRouter);
     }
 
     // 에러 처리 미들웨어 => 비동기 에러 처리 문제 해결 방법 찾아야 함
