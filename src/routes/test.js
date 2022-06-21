@@ -12,7 +12,6 @@ class TestRouter {
 
     getController() {
         this.router.get('/test', TestController.test);
-        
     }
 }
 

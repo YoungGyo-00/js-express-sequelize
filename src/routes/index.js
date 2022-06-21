@@ -6,13 +6,13 @@ const basename = path.basename(__filename);
 class MainRouter {
     constructor () {
         this.router = router;
-        this.setHandling();
+        this.setRouter();
     }
 
-    setHandling() {
+    setRouter() {
         fs.readdirSync(__dirname)
             .filter(file => {
-                return file !== basename;
+                return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) ==='.js');
             })
             .forEach(file => {
                 const cur_basename = file.split('.')[0];
@@ -21,4 +21,4 @@ class MainRouter {
     }
 }
 
-module.exports.MainRouter = new MainRouter().router;
+module.exports = new MainRouter().router;
