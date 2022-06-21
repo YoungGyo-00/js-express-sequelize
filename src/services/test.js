@@ -6,8 +6,8 @@ class TestService {
         try {
             console.log(dto);
             const result = await User.create({
-                email: "test2",
-                password: "test2"
+                email: "test3",
+                password: "test3"
             });
             return {"message" : "Answer: Good"};
         } catch (err) {

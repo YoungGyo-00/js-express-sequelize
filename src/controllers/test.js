@@ -8,4 +8,4 @@ class TestController {
     };
 }
 
-module.exports = TestController;
+module.exports.TestController = TestController;

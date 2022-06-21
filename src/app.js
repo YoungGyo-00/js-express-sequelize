@@ -10,7 +10,7 @@ const { UUID } = require('sequelize'); // 세션 ID 를 랜덤하고 중복되�
 const FileStore = require('session-file-store')(session); // 세션 객체 저장 모듈
 dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
 
-const testRoucter = require('./routes/test');
+const { MainRouter } = require('./routes');
 const { PORT, COOKIE_SECRET } = process.env;
 
 // 서버 생성
@@ -58,7 +58,7 @@ class App {
 
     // 라우터 설정
     getRouter() {
-        this.app.use('/', testRoucter);
+        this.app.use('/', MainRouter);
     }
 
     // 에러 처리 미들웨어 => 비동기 에러 처리 문제 해결 방법 찾아야 함
