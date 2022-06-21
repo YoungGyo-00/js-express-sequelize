@@ -1,18 +1,18 @@
 // Express API 구조 정의
 const router = require('express').Router();
-const Controller = require('../controllers/test');
+const TestController  = require('../controllers/test');
 const { User } = require('../models');
 
-class Test {
+class TestRouter {
     constructor () {
         this.router = router;
         this.getController();
     }
 
     getController() {
-        this.router.get('/', Controller.test);
+        this.router.get('/', TestController.test);
         
     }
 }
 
-module.exports = new Test().router;
+module.exports = new TestRouter().router;
