@@ -6,7 +6,7 @@ const fs = require('fs'); // 파일 읽기 모듈
 const path = require('path');
 
 const basename = path.basename(__filename); // index.js
-const sequelize = new Sequelize(
+const sequelize = new Sequelize( // sequelize 설정 부분
     config.database, config.username, config.password, config
 );
 

@@ -1,5 +1,5 @@
 // Call Services, Respond to client requests
-const TestService = require('../services/test');
+const { TestService } = require('../services/test');
 
 class TestController {
     static test = async (req, res, next) => {
