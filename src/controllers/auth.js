@@ -1,15 +1,17 @@
-const e = require('express');
+// call services, respond to client requests
 const { AuthService } = require('../services/auth');
+const { UserDto } = require('../dto/user');
 
-class AuthController {
-    static signup = async (req, res, next) => {
-        try{
-            const result = await AuthService.signup(req.body);
-            return res.status(201).send(result);
-        } catch (err) {
-            next(err);
-        }
-    };
-}
+const signup = async (req, res, next) => {
+    try{
+        const userDto = new UserDto(req.body);
+        const result = await AuthService.signup(userDto);
 
-module.exports.AuthController = AuthController;
+        return res.status(201).send(result);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
+module.exports.AuthController = { signup };

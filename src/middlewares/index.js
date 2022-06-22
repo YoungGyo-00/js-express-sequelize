@@ -1,20 +1,28 @@
 // Operations that check or maniuplate request prior to controller
 
-const isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        next();
-    } else {
-        res.status(403).send('로그인 필요');
-        throw new Error('로그인 필요');
+const isLoggedIn = async (req, res, next) => {
+    try {
+        if (req.isAuthenticated()) {
+            next();
+        } else {
+            throw { status: 403, message: '로그인이 필요한 상태입니다' };
+        }
+    } catch (err) {
+        console.error('\nmiddleware index.js isLoggedIn에서 에러');
+        next(err);
     }
 }
 
-const isNotLoggedIn = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        next();
-    } else {
-        res.status(403).send('로그인 상태입니다.');
-        throw new Error('로그인 상태입니다.');
+const isNotLoggedIn = async (req, res, next) => {
+    try {
+        if (!req.isAuthenticated()) {
+            next();
+        } else {
+            throw { status: 403, message: '로그인 상태입니다' };
+        }
+    } catch (err) {
+        console.error('\nmiddleware index.js isNotLoggedIn에서 에러');
+        next(err);
     }
 }
 

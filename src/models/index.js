@@ -1,4 +1,4 @@
-// 모델을 정의 + 관계 설정 파일 
+// 모델을 정의 + 관계 설정 파일 => Sequelize 객체들이 DAO
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development'; // 배포 환경에 따라 다른 값을 저장하는 변수
 const config = require('../config/config')[env]; // sequelize 설정 변수 읽어오기
