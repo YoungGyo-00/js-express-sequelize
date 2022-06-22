@@ -71,13 +71,13 @@ class App {
             next(err);
         });
 
-        this.app.use((err, req, res, ) => {
+        this.app.use((err, req, res, next) => {
             res.locals.message = err.message;
             res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
             res.status(err.status || 500);
             
-            console.error(err.message);
-            res.status(500).json({ message : error.message });
+            console.error(err);
+            res.json({ message : err.message });
         });
     }
 }

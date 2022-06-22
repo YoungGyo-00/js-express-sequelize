@@ -1,3 +1,4 @@
+const e = require('express');
 const { AuthService } = require('../services/auth');
 
 class AuthController {
