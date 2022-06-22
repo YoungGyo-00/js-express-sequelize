@@ -5,9 +5,7 @@ const { User } = require("../models");
 
 const signup = async (dto) => {
     const { email, password } = dto;
-    const exId = await User.findOne({
-        where : { email }
-    });
+    const exId = await User.findOne({ where : { email } });
     
     if (exId) {
         console.error('\nAuthService signup exId 에러 발생')

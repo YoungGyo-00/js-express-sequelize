@@ -11,7 +11,7 @@ const FileStore = require('session-file-store')(session); // 세션 객체 저�
 const cors = require('cors') // 외부 도메인, 프로토콜, 포트에 있는 리소스를 요청하는 cross-orgin HTTP 요청 처리
 dotenv.config(); // .env 파일을 읽을 수 있게 설정 => ex) process.env.PORT
 
-const MainRouter = require('./routes');
+const MainRouter = require('./api/routes');
 const { PORT, COOKIE_SECRET } = process.env;
 
 // 서버 생성
