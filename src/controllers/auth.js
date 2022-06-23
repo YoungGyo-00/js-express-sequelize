@@ -1,5 +1,5 @@
 // call services, respond to client requests
-const { AuthService } = require('../services/auth');
+const { AuthService } = require('../services');
 const { UserDto } = require('../dto/user');
 
 const signup = async (req, res, next) => {

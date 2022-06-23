@@ -14,10 +14,10 @@ module.exports = (passport) => {
     });
 
     // 서버 요청이 올 때마다 항상 실행하여 로그인 유저 정보를 불러와 이용
-    passport.deserializeUser((email, done) => {
+    passport.deserializeUser((id, done) => {
         // req.session에 저장된 사용자 아이디를 바탕으로 DB 조회 후 req.user에 저장
         User.findOne({
-            where : { USERNAMEFIELD : email }
+            where : { USERNAMEFIELD : id }
         })
             .then(user => done(null, user)) // id 로 사용자 조회 후 전체 정보를 req.user에 저장
             .catch(err => done(err));

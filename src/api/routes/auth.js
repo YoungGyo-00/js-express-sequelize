@@ -1,7 +1,7 @@
 // Express API 구조 정의서
 const router = require('express').Router();
 
-const { AuthController } = require('../../controllers/auth');
+const { AuthController } = require('../../controllers');
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const { User } = require('../../models');
 
