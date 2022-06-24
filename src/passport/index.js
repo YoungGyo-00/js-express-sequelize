@@ -1,12 +1,13 @@
 // 인증 전략을 등록, 데이터 저장 + 불러오는 기능
-const local = require('./localStrategy'); // 로컬 서버로 로그인
+const passport = require('passport');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const local = require('./localStrategy'); // 로컬 서버로 로그인
 const { User } = require('../models');
 const { USERNAMEFIELD, PASSWORDFIELD } = process.env;
 
-module.exports = (passport) => {
+module.exports = () => {
     // req.login(user, ...) 가 실행되면, serializeUser가 실행
     // 로그인 과정에서만 실행
     passport.serializeUser((user, done) => {
@@ -23,5 +24,5 @@ module.exports = (passport) => {
             .catch(err => done(err));
     });
 
-    local(passport, USERNAMEFIELD, PASSWORDFIELD);
+    local(USERNAMEFIELD, PASSWORDFIELD);
 }

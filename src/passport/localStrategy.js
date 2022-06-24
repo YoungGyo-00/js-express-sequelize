@@ -1,9 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 const { User } = require('../models');
 
-module.exports = (passport, usernameField, passwordField) => {
+module.exports = (usernameField, passwordField) => {
     passport.use(new LocalStrategy({ // 첫번째 인자는 객체
         usernameField : usernameField,
         passwordField : passwordField

@@ -27,7 +27,7 @@ class App {
     // 미들웨어 설정
     setMiddleWare() {
         this.app.set('port', PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
-        passportConfig(passport); // passport 미들웨어는 passport 폴더에서 실행
+        passportConfig(); // passport 미들웨어는 passport 폴더에서 실행
 
         this.app.use(cors()); // 모든 도메인에 대해 허용
         this.app.use(morgan('dev')); // 추가적인 로그 생성

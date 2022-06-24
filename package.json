@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "22년도 졸업 프로젝트 서버 코드",
   "scripts": {
-    "start": "nodemon ./bin/www.js"
+    "start": "nodemon ./src/bin/www.js"
   },
   "repository": {
     "type": "git",
