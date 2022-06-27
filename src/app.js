@@ -16,75 +16,75 @@ const { PORT, COOKIE_SECRET } = process.env;
 
 // 서버 생성
 class App {
-  constructor() {
-    this.app = express(); // express() => 애플리케이션 객체 생성
-    this.setMiddleWare();
-    this.setStatic();
-    this.getRouter();
-    this.errorHandler();
-  }
+    constructor() {
+        this.app = express(); // express() => 애플리케이션 객체 생성
+        this.setMiddleWare();
+        this.setStatic();
+        this.getRouter();
+        this.errorHandler();
+    }
 
-  // 미들웨어 설정
-  setMiddleWare() {
-    this.app.set("port", PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
-    passportConfig(); // passport 미들웨어는 passport 폴더에서 실행
+    // 미들웨어 설정
+    setMiddleWare() {
+        this.app.set("port", PORT || 8080); // .env 파일에 key값이 PORT 가져오기 => 없으면 8080번(기본값) 포트 사용
+        passportConfig(); // passport 미들웨어는 passport 폴더에서 실행
 
-    this.app.use(cors()); // 모든 도메인에 대해 허용
-    this.app.use(morgan("dev")); // 추가적인 로그 생성
-    this.app.use(express.json()); // json Request Body 파싱
-    this.app.use(express.urlencoded({ extended: false })); // x-www-form-urlencoded 형태 데이터 파싱, querystring(false), qs(true)
-    this.app.use(cookieParser(COOKIE_SECRET)); // 암호화(서명)된 쿠키 발급
-    this.app.use(
-      session({
-        resave: false, // 세션 데이터가 바뀌기 전까지 세션저장소의 값을 저장할지 여부
-        secret: COOKIE_SECRET, // cookieParser와 같은 signed(서명) 사용
-        store: new FileStore(), // mysql(실제 배포 시) 에 세션을 저장할 수도 있음
-        saveUninitialized: false, // 세션이 필요하기 전에 세션 구동할지 여부
-        cookie: {
-          // 세션 쿠키 설정
-          httpOnly: true, // JS를 통해 세션 쿠키를 사용할 수 없도록 설정
-          secure: false, // http 환경에서만 사용(개발 단계)
-          maxAge: 1 * 60 * 60 * 1000, // 1시간 설정
-        },
-        rolling: true, // expiration reset
-        genid: () => {
-          // 세션 ID 만들기, req 첨부된 일부 값을 사용하려면 첫 번째 인수로 req 제공
-          return "testCookie";
-        },
-      })
-    );
-    this.app.use(passport.initialize()); // passport 구성을 위한 미들웨어
-    this.app.use(passport.session()); // passport.deserializeUser() Method 실행
-  }
+        this.app.use(cors()); // 모든 도메인에 대해 허용
+        this.app.use(morgan("dev")); // 추가적인 로그 생성
+        this.app.use(express.json()); // json Request Body 파싱
+        this.app.use(express.urlencoded({ extended: false })); // x-www-form-urlencoded 형태 데이터 파싱, querystring(false), qs(true)
+        this.app.use(cookieParser(COOKIE_SECRET)); // 암호화(서명)된 쿠키 발급
+        this.app.use(
+            session({
+                resave: false, // 세션 데이터가 바뀌기 전까지 세션저장소의 값을 저장할지 여부
+                secret: COOKIE_SECRET, // cookieParser와 같은 signed(서명) 사용
+                store: new FileStore(), // mysql(실제 배포 시) 에 세션을 저장할 수도 있음
+                saveUninitialized: false, // 세션이 필요하기 전에 세션 구동할지 여부
+                cookie: {
+                    // 세션 쿠키 설정
+                    httpOnly: true, // JS를 통해 세션 쿠키를 사용할 수 없도록 설정
+                    secure: false, // http 환경에서만 사용(개발 단계)
+                    maxAge: 1 * 60 * 60 * 1000, // 1시간 설정
+                },
+                rolling: true, // expiration reset
+                genid: () => {
+                    // 세션 ID 만들기, req 첨부된 일부 값을 사용하려면 첫 번째 인수로 req 제공
+                    return "testCookie";
+                },
+            })
+        );
+        this.app.use(passport.initialize()); // passport 구성을 위한 미들웨어
+        this.app.use(passport.session()); // passport.deserializeUser() Method 실행
+    }
 
-  // 사진 등의 정적 파일 경로 설정
-  setStatic() {
-    // this.app.use('/', express.static(path.join(__dirname + 'public')));
-  }
+    // 사진 등의 정적 파일 경로 설정
+    setStatic() {
+        // this.app.use('/', express.static(path.join(__dirname + 'public')));
+    }
 
-  // 라우터 설정
-  getRouter() {
-    this.app.use(MainRouter);
-  }
+    // 라우터 설정
+    getRouter() {
+        this.app.use(MainRouter);
+    }
 
-  // 에러 처리 미들웨어 => 비동기 에러 처리 문제 해결 방법 찾아야 함
-  errorHandler() {
-    this.app.use((req, res, next) => {
-      const err = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
-      err.status = 404;
-      next(err);
-    });
+    // 에러 처리 미들웨어 => 비동기 에러 처리 문제 해결 방법 찾아야 함
+    errorHandler() {
+        this.app.use((req, res, next) => {
+            const err = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
+            err.status = 404;
+            next(err);
+        });
 
-    // eslint-disable-next-line no-unused-vars
-    this.app.use((err, req, res, next) => {
-      res.locals.message = err.message;
-      res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
-      res.status(err.status || 500);
+        // eslint-disable-next-line no-unused-vars
+        this.app.use((err, req, res, next) => {
+            res.locals.message = err.message;
+            res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
+            res.status(err.status || 500);
 
-      console.error(err);
-      res.json({ message: err.message });
-    });
-  }
+            console.error(err);
+            res.json({ message: err.message });
+        });
+    }
 }
 
 module.exports = new App().app;
