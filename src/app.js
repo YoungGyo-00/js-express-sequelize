@@ -1,7 +1,7 @@
 const express = require("express"); // http 모듈 + 많은 기능 포함
 const morgan = require("morgan"); // request 에 대한 추가 로그를 콘솔에 기록
 const cookieParser = require("cookie-parser"); // 요청된 쿠키를 쉽게 추출하는 미들웨어
-// const path = require("path"); // 파일 경로 찾을 때 사용하는 모듈
+// const path =  require("path"); // 파일 경로 찾을 때 사용하는 모듈
 const passport = require("passport"); // 로그인(local, kakao ...)에 따른 요청 인증 모듈
 const passportConfig = require("./passport");
 const session = require("express-session"); // passport 모듈로 로그인 후 유저 정보를 세션에 저장

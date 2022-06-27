@@ -1,9 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true,
-        "node": true,
-        "commonjs": true
+        "es6": true,
+        "node": true
     },
     "plugins": ["prettier"],
     "extends": ["eslint:recommended", "plugin:prettier/recommended"],
