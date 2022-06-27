@@ -1,14 +1,14 @@
 // DB 환경 설정 파일
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 
 const {
-  MYSQL_USERNAME, 
-  MYSQL_PASSWORD, 
-  MYSQL_DATABASE, 
-  MYSQL_DATABASE_PRODUCTION, 
-  MYSQL_DATABASE_TEST, 
-  MYSQL_HOST, 
+  MYSQL_USERNAME,
+  MYSQL_PASSWORD,
+  MYSQL_DATABASE,
+  MYSQL_DATABASE_PRODUCTION,
+  MYSQL_DATABASE_TEST,
+  MYSQL_HOST,
   DIALECT,
 } = process.env;
 
