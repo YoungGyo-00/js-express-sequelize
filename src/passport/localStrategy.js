@@ -29,7 +29,7 @@ module.exports = (usernameField, passwordField) => {
 
                     const result = await bcrypt.compare(
                         password,
-                        exUser.passwordField
+                        exUser.passwordField,
                     );
                     if (!result) {
                         // 비밀번호가 맞는지 확인
@@ -42,7 +42,7 @@ module.exports = (usernameField, passwordField) => {
                     console.error(err.message);
                     done(err);
                 }
-            }
-        )
+            },
+        ),
     );
 };

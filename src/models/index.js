@@ -10,7 +10,7 @@ const sequelize = new Sequelize( // sequelize 설정 부분
     config.database,
     config.username,
     config.password,
-    config
+    config,
 );
 
 class Database {
@@ -24,27 +24,27 @@ class Database {
 
     setModel() {
         fs.readdirSync(__dirname) // node 작업 디렉토리 기반 상대 경로 설정
-            .filter((file) => {
+            .filter(file => {
                 return (
                     file.indexOf(".") !== 0 &&
                     file !== basename &&
                     file.slice(-3) === ".js"
                 ); // 모델 파일만 배열 구성
             })
-            .forEach((file) => {
+            .forEach(file => {
                 const model = require(path.join(__dirname, file)); // 파일에 저장되어 있는 모델 정의와 동일한 객체 저장
                 this.db[model.name] = model; // 객체 추가
             });
     }
 
     init() {
-        Object.keys(this.db).forEach((modelName) => {
+        Object.keys(this.db).forEach(modelName => {
             this.db[modelName].init(sequelize);
         });
     }
 
     associate() {
-        Object.keys(this.db).forEach((modelName) => {
+        Object.keys(this.db).forEach(modelName => {
             if (this.db[modelName].associate) {
                 this.db[modelName].associate(this.db);
             }

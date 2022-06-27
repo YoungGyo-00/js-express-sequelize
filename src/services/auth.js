@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const { User } = require("../models");
 
 class AuthService {
-    static signup = async (dto) => {
+    static signup = async dto => {
         const { email, password } = dto;
         const exId = await User.findOne({ where: { email } });
 

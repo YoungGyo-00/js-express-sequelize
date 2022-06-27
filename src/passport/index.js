@@ -20,8 +20,8 @@ module.exports = () => {
         User.findOne({
             where: { USERNAMEFIELD: id },
         })
-            .then((user) => done(null, user)) // id 로 사용자 조회 후 전체 정보를 req.user에 저장
-            .catch((err) => done(err));
+            .then(user => done(null, user)) // id 로 사용자 조회 후 전체 정보를 req.user에 저장
+            .catch(err => done(err));
     });
 
     local(USERNAMEFIELD, PASSWORDFIELD);

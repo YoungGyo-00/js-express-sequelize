@@ -51,7 +51,7 @@ class App {
                     // 세션 ID 만들기, req 첨부된 일부 값을 사용하려면 첫 번째 인수로 req 제공
                     return "testCookie";
                 },
-            })
+            }),
         );
         this.app.use(passport.initialize()); // passport 구성을 위한 미들웨어
         this.app.use(passport.session()); // passport.deserializeUser() Method 실행

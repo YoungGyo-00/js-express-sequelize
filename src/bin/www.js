@@ -8,7 +8,7 @@ sequelize
     .then(() => {
         console.log("DB 연결 성공");
     })
-    .catch((err) => {
+    .catch(err => {
         // 에러 잡아주는 코드
         console.error(err);
     });

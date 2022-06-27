@@ -4,7 +4,7 @@ module.exports = class User extends Sequelize.Model {
     // 공개하고 싶지 않은 속성(getter & setter 불가능)
 
     // 모델의 속성 정의 부분(공개)
-    static init = (sequelize) => {
+    static init = sequelize => {
         return super.init(
             {
                 email: {
@@ -26,7 +26,7 @@ module.exports = class User extends Sequelize.Model {
                 paranoid: false, // deletedAt 생성(true)
                 charset: "utf8",
                 collate: "utf8_general_ci",
-            }
+            },
         );
     };
 
