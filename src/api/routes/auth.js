@@ -21,7 +21,7 @@ class AuthRouter {
     }
 
     getController() {
-
+        
     }
 
     postController() {
