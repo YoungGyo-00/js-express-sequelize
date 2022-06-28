@@ -1,12 +1,14 @@
 // Express API 구조 정의서
-const router = require('express').Router();
+const router = require("express").Router();
 
-const { AuthController } = require('../../controllers');
-const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
-const { User } = require('../../models');
+const { AuthController } = require("../../controllers");
+// eslint-disable-next-line no-unused-vars
+const { isLoggedIn, isNotLoggedIn } = require("../middlewares");
+// eslint-disable-next-line no-unused-vars
+const { User } = require("../../models");
 
 class AuthRouter {
-    constructor () {
+    constructor() {
         this.router = router;
         this.setMiddleware();
         this.getController();
@@ -14,18 +16,23 @@ class AuthRouter {
     }
 
     setMiddleware() {
-        router.use((req, res, next) => { // 전역적으로 사용할 수 있는 변수 만들기
+        router.use((req, res, next) => {
+            // 전역적으로 사용할 수 있는 변수 만들기
             res.locals.user = req.user;
             next();
-        })
+        });
     }
 
+<<<<<<< HEAD
     getController() {
         
     }
+=======
+    getController() {}
+>>>>>>> c65eec58009ba1cdfad66390c952a44603fa514b
 
     postController() {
-        this.router.post('/signup', isNotLoggedIn, AuthController.signup);
+        this.router.post("/signup", isNotLoggedIn, AuthController.signup);
     }
 }
 
