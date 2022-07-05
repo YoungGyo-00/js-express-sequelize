@@ -11,7 +11,6 @@ class AuthRouter {
     constructor() {
         this.router = router;
         this.setMiddleware();
-        this.getController();
         this.postController();
     }
 
@@ -22,14 +21,6 @@ class AuthRouter {
             next();
         });
     }
-
-<<<<<<< HEAD
-    getController() {
-        
-    }
-=======
-    getController() {}
->>>>>>> c65eec58009ba1cdfad66390c952a44603fa514b
 
     postController() {
         this.router.post("/signup", isNotLoggedIn, AuthController.signup);

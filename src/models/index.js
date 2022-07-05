@@ -33,6 +33,7 @@ class Database {
             })
             .forEach(file => {
                 const model = require(path.join(__dirname, file)); // 파일에 저장되어 있는 모델 정의와 동일한 객체 저장
+                console.log(require(path.join(__dirname, file)));
                 this.db[model.name] = model; // 객체 추가
             });
     }
